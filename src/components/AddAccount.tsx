@@ -28,7 +28,7 @@ const AddAccount = () => {
     const onSubmit = (data: AddAccountForm, e: any) => {
         addAccount(data.structure, data.name, data.universeId);
         e.target.reset(); //reset fthe form
-        window.location.href = '/';
+        //window.location.href = '/';
     };
 
     return(
