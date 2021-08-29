@@ -15,18 +15,18 @@ const schema = yup.object().shape({
 interface AddAccountForm {
     name: string,
     structure: string,
-    universeId: number
+    universe: string
 }
 
 const AddAccount = () => {
-    const { addAccount } = useContext<AccountsContextType>(AccountsContext);
+    const { updateAccount } = useContext<AccountsContextType>(AccountsContext);
     
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(schema)
     });
 
     const onSubmit = (data: AddAccountForm, e: any) => {
-        addAccount(data.structure, data.name, data.universeId);
+        updateAccount(0, data.structure, data.name, data.universe);
         e.target.reset(); //reset fthe form
         //window.location.href = '/';
     };

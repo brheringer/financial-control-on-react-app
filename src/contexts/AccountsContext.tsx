@@ -6,7 +6,7 @@ import { get_accounts, save_account } from '../services/AccountService';
 export const AccountsContext = createContext<AccountsContextType>({
     accounts: [],
     error: '',
-    addAccount: () => {},
+    updateAccount: () => {},
     removeAccount: () => {}
 }); 
 
@@ -23,16 +23,16 @@ const AccountsProvider = (props: any) => {
             if(result.errors)
                 setError(result.errors.message);
             else
-                setAccounts(result.data.accounts);
+                setAccounts(result.data?.accounts);
         })
     }, []); // empty dependency array means this effect will only run once (like componentDidMount in classes)
 
-    const addAccount = (structure: string, name: string, universeId: number) => {
+    const updateAccount = (id: number, structure: string, name: string, universe: string) => {
         const account: Account = { 
-            id: 0,
+            id: id,
             structure: structure,
             name: name,
-            universeId: universeId };
+            universe: universe };
         //TODO if valid
         save_account(account).then(a => {
             account.id = a.id;
@@ -47,7 +47,7 @@ const AccountsProvider = (props: any) => {
     }
     
     return(
-        <AccountsContext.Provider value={{accounts, error, addAccount, removeAccount}}>
+        <AccountsContext.Provider value={{accounts, error, updateAccount, removeAccount}}>
             {props.children}
         </AccountsContext.Provider>
     )
