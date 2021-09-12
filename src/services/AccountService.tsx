@@ -14,7 +14,7 @@ interface QueryError {
     message: string;
 }
 
-export const get_accounts = (): Promise<QueryResult> => {
+export const getAccounts = (): Promise<QueryResult> => {
     const query = `{ 
         accounts { 
             id
@@ -25,7 +25,7 @@ export const get_accounts = (): Promise<QueryResult> => {
     return post_graphql<QueryResult>(query);
 }
 
-export const save_account = (data: Account) => {
+export const saveAccount = (data: Account) => {
     const mutation = `mutation { 
         updateAccount(id: "${data.id}", structure: "${data.structure}", name: "${data.name}") { 
             account { 
@@ -34,6 +34,13 @@ export const save_account = (data: Account) => {
                 name
             }
         }
+    }`;
+    return post_graphql<Account>(mutation);
+};
+
+export const deleteAccount = (data: Account) => {
+    const mutation = `mutation { 
+        delete(id: "${data.id}")
     }`;
     return post_graphql<Account>(mutation);
 };

@@ -36,29 +36,29 @@ const AccountListItem = (props: AccountListItemProps) => {
 
     return(
         <form onSubmit={handleSubmit<AccountListItemProps>(onSubmit)}>
-            <tr>
-                <td>
+            <div className="row">
+                <div className="col-1">
                     {props.account.id}
-                </td>
-                <td>
-                    <input type="text" name="account.structure" id="account.structure"
+                </div>
+                <div className="col-2">
+                    <input type="text" name="structure" id="structure"
                             placeholder="Structure like 1.01"
                             ref={register} />
                     <span><small>{errors.structure?.message}</small></span>
-                </td>
-                <td>
+                </div>
+                <div className="col">
                     {props.account.name}
-                </td>
-                <td>
+                </div>
+                <div className="col-3">
                     {props.account.universe}
-                </td>
-                <td>
+                </div>
+                <div className="col-3">
                     <button className="btn btn-primary"
                         onClick={() => onRemove(props.account)}>
                         <img src="lixeira.svg" alt=""></img>
                     </button>
-                </td>
-            </tr>
+                </div>
+            </div>
         </form>
     );
 }

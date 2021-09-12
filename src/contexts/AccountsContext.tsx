@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { AccountsContextType } from './AccountsContextType';
 import { Account } from "../models/Account"
-import { get_accounts, save_account } from '../services/AccountService';
+import { getAccounts, saveAccount, deleteAccount } from '../services/AccountService';
 
 export const AccountsContext = createContext<AccountsContextType>({
     accounts: [],
@@ -19,7 +19,7 @@ const AccountsProvider = (props: any) => {
     // }, [accounts]); //when this object changes, do that
 
     useEffect(() => {
-        get_accounts().then(result => {
+        getAccounts().then(result => {
             if(result.errors)
                 setError(result.errors.message);
             else
@@ -34,7 +34,8 @@ const AccountsProvider = (props: any) => {
             name: name,
             universe: universe };
         //TODO if valid
-        save_account(account).then(a => {
+        //TODO this add only if new
+        saveAccount(account).then(a => {
             account.id = a.id;
             setAccounts([...accounts, account]);
         });
@@ -42,8 +43,9 @@ const AccountsProvider = (props: any) => {
     
     const removeAccount = (account: Account) => {
         const index = accounts.indexOf(account);
-        //TODO call delete service
-        setAccounts(accounts.filter((_, i) => i !== index));
+        deleteAccount(account).then(() => {
+            setAccounts(accounts.filter((_, i) => i !== index));            
+        })
     }
     
     return(

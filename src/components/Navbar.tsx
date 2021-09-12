@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
     return (
         <div className="bg-dark text-light p-2">
+            |<Link to="/login"> Login </Link>
             |<Link to="/"> Home </Link>
             |<Link to="/accounts"> Accounts </Link>
             |<Link to="/resultCenters"> Result Centers </Link>

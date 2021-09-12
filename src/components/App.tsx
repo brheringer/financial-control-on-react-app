@@ -7,22 +7,22 @@ import Navbar from './Navbar';
 
 const App = () => {
     return(
-                        <AccountsContext>
         <Router>
             <Navbar></Navbar>
             <br/>
-            <div>
+            <div className="container">
                 <Switch>
-                    <Route path="/">
+                    <Route path="/login">
                         <Login></Login>
                     </Route>
                     <Route path="/accounts">
+                        <AccountsContext>
                             <AccountsList></AccountsList>
+                        </AccountsContext>
                     </Route>
                 </Switch>
             </div>
         </Router>
-                        </AccountsContext>
     );
 }
 
